@@ -8,7 +8,7 @@ export class Register extends Component {
       <div className="row">
 
         <Divider />
-        <RightContent />
+        {/*<RightContent />*/}
       </div>
     )
   }

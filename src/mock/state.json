@@ -2,31 +2,28 @@
   "listStates": [
     {
       "id": "1",
-      "name": "Alaska"
+      "name": "Gampaha"
     },
     {
       "id": "2",
-      "name": "California"
+      "name": "Colombo"
     },
     {
       "id": "3",
-      "name": "Florida"
+      "name": "Kandy"
     },
     {
       "id": "4",
-      "name": "Indiana"
+      "name": "Jaffna"
     },
     {
       "id": "5",
-      "name": "New York"
+      "name": "Galle"
     },
     {
       "id": "6",
-      "name": "Ohio"
-    },
-    {
-      "id": "7",
-      "name": "Tennessee"
+      "name": "Mannar"
     }
+
   ]
 }

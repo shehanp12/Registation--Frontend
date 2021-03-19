@@ -158,7 +158,7 @@ export class RightContent extends Component {
   }
 
   render() {
-    const { firstName, lastName, userName,password,confirmPassword,age, email, telephone, state, country, address, address1, address2, interests, subscribenewsletter } = this.state.user;
+    const { firstName, lastName, userName,password,confirmPassword, email, phoneNumber,mobileNumber, state, country, address, address1, address2, interests, subscribenewsletter } = this.state.user;
     const { submitted } = this.state;
     const listState = stateList.listStates.map((item, key) =>
       <option key={key} value={item.name}>{item.name}</option>
@@ -189,18 +189,11 @@ export class RightContent extends Component {
             <input type="text" value={confirmPassword} name="confirmPassword" onChange={(e) => { this.inputChange(e)} } className="form-control" placeholder="ConfirmPassword" />
           </div>
         </div>
-        <div className="row">
-          <label htmlFor="formControlAgeRange" className="col-sm-2 col-form-label">Age</label>
-          <div className="col-sm-6 mb-2">
-            <InputRange min={1} max={100} step={1} value={age} onChangeInputRange={this.onChangeInputRange} />
-          </div>
-          <div className="col-sm-4">
-          </div>
-        </div>
+
         <div className="row">
           <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
           <div className="col-sm-6 mb-2">
-            <input type="email" value={email} name="email" onChange={(e) => { this.inputChange(e)} } className="form-control" id="email" placeholder="itjebasuthan@gmail.com" />
+            <input type="email" value={email} name="email" onChange={(e) => { this.inputChange(e)} } className="form-control" id="email" placeholder="Email" />
             { submitted && this.state.errors.user.email.length > 0 &&  <span className='error'>{this.state.errors.user.email}</span>}
           </div>
           <div className="col-sm-4">
@@ -209,7 +202,11 @@ export class RightContent extends Component {
         <div className="row">
           <label htmlFor="telephone" className="col-sm-2 col-form-label">Tel</label>
           <div className="col-sm-6 mb-2">
-            <input type="text" pattern="[0-9]" maxLength="14" value={telephone} name="telephone" onChange={(e) => { this.inputChange(e)} }  className="form-control" id="telephone" placeholder="(212)477-1000" />
+            <input type="text" pattern="[0-9]" maxLength="14" value={phoneNumber} name="telephone" onChange={(e) => { this.inputChange(e)} }  className="form-control" id="telephone" placeholder="Telephone" />
+            { submitted && this.state.errors.user.telephone.length > 0 &&  <span className='error'>{this.state.errors.user.telephone}</span>}
+          </div>
+          <div className="col-sm-6 mb-2">
+            <input type="text" pattern="[0-9]" maxLength="14" value={mobileNumber} name="telephone" onChange={(e) => { this.inputChange(e)} }  className="form-control" id="telephone" placeholder="MobileNumber" />
             { submitted && this.state.errors.user.telephone.length > 0 &&  <span className='error'>{this.state.errors.user.telephone}</span>}
           </div>
           <div className="col-sm-4">
@@ -229,47 +226,9 @@ export class RightContent extends Component {
           <label htmlFor="staticEmail1" className="col-sm-2 col-form-label">Country</label>
           <div className="col-sm-6 mb-2">
             <select className="custom-select" value={country} name="country" id="inlineFormCustomSelect" onChange={this.inputChange}>
-              <option value="US">United States</option>
-              <option value="IN">India</option>
+              <option value="SL">Sri Lanka</option>
+
             </select>
-          </div>
-          <div className="col-sm-4">
-          </div>
-        </div>
-        <div className="row">
-          <label htmlFor="staticEmail1" className="col-sm-2 col-form-label">Address</label>
-          <div className="col-sm-6 mb-2">
-            <select className="custom-select mb-2" value={address} id="inlineFormCustomSelect" onChange={this.onChangeAddress}>
-              <option value="Home">Home</option>
-              <option value="Company">Company</option>
-            </select>
-            <div className="row col-sm-12">
-              <div className="col-sm-5 mr-sm-1 mb-2">
-                <textarea className="form-control" name="address1" rows="3" placeholder={address + ' Address1'} value={address1} onChange={this.inputChange}></textarea>
-                { submitted && this.state.errors.user.address1.length > 0 &&  <span className='error'>{this.state.errors.user.address1}</span>}
-              </div>
-              <div className="col-sm-5 mr-sm-1 mb-2">
-                <textarea className="form-control" name="address2" rows="3" placeholder={address + ' Address2'} value={address2} onChange={this.inputChange}></textarea>
-                { submitted && this.state.errors.user.address2.length > 0 &&  <span className='error'>{this.state.errors.user.address2}</span>}
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-          </div>
-        </div>
-        <div className="row">
-          <label htmlFor="staticEmail1" className="col-sm-2 col-form-label">Interests</label>
-          <div className="col-sm-6 mb-2">
-            <MultiSelect className="form-control" searchPlaceholder="Interests" selected={interests} onSelect={this.onSelectedInterest} />
-            { submitted && this.state.errors.user.interests.length > 0 &&  <span className='error'>{this.state.errors.user.interests}</span>}
-          </div>
-          <div className="col-sm-4">
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-2"></div>
-          <div className="col-sm-6 mb-2">
-            <label htmlFor="subscribenewsletter"><input type="checkbox" checked={subscribenewsletter} name="subscribenewsletter" onChange={this.checkboxChange} id="subscribenewsletter" style={{margin: '10px'}} />Subscribe to the news letter</label>
           </div>
           <div className="col-sm-4">
           </div>

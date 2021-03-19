@@ -18,7 +18,7 @@ class App extends React.Component {
       <div>
         <Header />
         <Navigation />
-        <Footer />
+
       </div>
     )
   }
