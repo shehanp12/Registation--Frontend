@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Divider, ProfileImage } from '../../components';
 import RightContent from './components/RightContent';
 
 export class Register extends Component {
@@ -7,8 +6,9 @@ export class Register extends Component {
     return (
       <div className="row">
 
-        <Divider />
-        {/*<RightContent />*/}
+
+
+        <RightContent />
       </div>
     )
   }

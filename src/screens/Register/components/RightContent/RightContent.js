@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
 import { ActionCreators } from '../../../../actions/profile';
-import { InputRange, MultiSelect } from '../../../../components';
 import stateList from '../../../../mock/state.json';
 import { formatPhoneNumber, isValidEmail } from '../../../../utils';
 import './style.css';
@@ -16,26 +15,26 @@ export class RightContent extends Component {
         lastName: '',
         userName:'',
         password:'',
-        telephone: '',
-        age: 28,
+        phoneNumber: '',
+        mobileNumber:'',
         email: '',
         state: '',
         country: '',
-        address: 'Home',
-        address1: '',
-        address2: '',
-        interests: [],
-        subscribenewsletter: false
+
+
       },
       errors: {
         user: {
           firstName: 'Enter First Name',
+          lastName:'Enter Last Name',
           userName: 'Enter User Name',
           telephone: 'Enter Telephone',
-          email: 'Email is not valid!',
-          address1: 'Enter address1',
-          address2: 'Enter address2',
-          interests: 'Enter your Interests'
+          email: 'Email is not valid',
+          phoneNumber:'Phone number is not valid',
+          mobileNumber: 'Mobile number is not valid'
+
+
+
         }
       },
       validForm: false,
@@ -60,17 +59,20 @@ export class RightContent extends Component {
       case 'firstName':
         errors.user.firstName = value.length < 1 ? 'Enter First Name' : '';
         break;
+      case 'lastName':
+        errors.user.lastName = value.length < 1 ? 'Enter Last Name': '';
+        break;
+      case 'userName':
+        errors.user.userName = value.length < 1 ? 'Enter User Name': '';
+        break;
       case 'email':
-        errors.user.email = isValidEmail(value) ? '' : 'Email is not valid!';
+        errors.user.email = isValidEmail(value) ? '' : 'Email is not valid';
         break;
-      case 'telephone':
-        errors.user.telephone = value.length < 1 && value.length > 10 ? 'Enter valid telephone number' : '';
+      case 'phoneNumber':
+        errors.user.phoneNumber = value.length < 1 && value.length > 10 ? 'Enter valid phone number' : '';
         break;
-      case 'address1':
-        errors.user.address1 = value.length < 1 ? `Enter ${this.state.user.address} address1` : '';
-        break;
-      case 'address2':
-        errors.user.address2 = value.length < 1 ? `Enter ${this.state.user.address} address2` : '';
+      case 'mobileNumber':
+        errors.user.mobileNumber = value.length < 1 && value.length > 10 ? 'Enter valid mobile number' : '';
         break;
       default:
         break;
@@ -80,12 +82,12 @@ export class RightContent extends Component {
   }
 
   inputChange = (event) => {
-    let telphone = ''
+    let mobileNumber = ''
     const { name, value } = event.target;
     const user = this.state.user;
-    if (name === 'telephone') {
-      telphone = formatPhoneNumber(value);
-      user[name] = telphone;
+    if (name === 'mobileNumber') {
+      mobileNumber = formatPhoneNumber(value);
+      user[name] = mobileNumber;
     } else {
       user[name] = value;
     }
@@ -149,33 +151,33 @@ export class RightContent extends Component {
   resetErrorMsg = () => {
     let errors = this.state.errors;
     errors.user.firstName = ''
-    errors.user.telephone = ''
+    errors.user.mobileNumber = ''
     errors.user.email = ''
-    errors.user.address1 = ''
-    errors.user.address2 = ''
-    errors.user.interests = ''
+
     this.setState({ errors });
   }
 
   render() {
-    const { firstName, lastName, userName,password,confirmPassword, email, phoneNumber,mobileNumber, state, country, address, address1, address2, interests, subscribenewsletter } = this.state.user;
+    const { firstName, lastName, userName,password,confirmPassword, email, phoneNumber,mobileNumber, state, country} = this.state.user;
     const { submitted } = this.state;
     const listState = stateList.listStates.map((item, key) =>
       <option key={key} value={item.name}>{item.name}</option>
     );
     return (
-      <div className="rightPanel">
+      <div className="pagecenter loginForm">
         <div className="row">
           <label className="col-sm-2 col-form-label">Name</label>
-          <div className="col-sm-3 mb-2">
+          <div className="col-sm-3 mb-1">
             <input type="text" value={firstName} name="firstName" onChange={(e) => { this.inputChange(e)} } className="form-control" placeholder="First Name" />
             { submitted && this.state.errors.user.firstName.length > 0 &&  <span className='error'>{this.state.errors.user.firstName}</span>}
           </div>
           <div className="col-sm-3 mb-2">
             <input type="text" value={lastName} name="lastName" onChange={(e) => { this.inputChange(e)} } className="form-control" placeholder="Last Name" />
+            { submitted && this.state.errors.user.lastName.length > 0 &&  <span className='error'>{this.state.errors.user.lastName}</span>}
           </div>
           <div className="col-sm-3 mb-2">
             <input type="text" value={userName} name="userName" onChange={(e) => { this.inputChange(e)} } className="form-control" placeholder="User Name" />
+            { submitted && this.state.errors.user.userName.length > 0 &&  <span className='error'>{this.state.errors.user.userName}</span>}
           </div>
           <div className="col-sm-4">
           </div>
@@ -184,6 +186,7 @@ export class RightContent extends Component {
           <label className="col-sm-2 col-form-label">Password</label>
           <div className="col-sm-3 mb-2">
             <input type="text" value={password} name="password" onChange={(e) => { this.inputChange(e)} } className="form-control" placeholder="Password" />
+            { submitted && this.state.errors.user.userName.length > 0 &&  <span className='error'>{this.state.errors.user.userName}</span>}
           </div>
           <div className="col-sm-3 mb-2">
             <input type="text" value={confirmPassword} name="confirmPassword" onChange={(e) => { this.inputChange(e)} } className="form-control" placeholder="ConfirmPassword" />
@@ -201,15 +204,19 @@ export class RightContent extends Component {
         </div>
         <div className="row">
           <label htmlFor="telephone" className="col-sm-2 col-form-label">Tel</label>
-          <div className="col-sm-6 mb-2">
-            <input type="text" pattern="[0-9]" maxLength="14" value={phoneNumber} name="telephone" onChange={(e) => { this.inputChange(e)} }  className="form-control" id="telephone" placeholder="Telephone" />
-            { submitted && this.state.errors.user.telephone.length > 0 &&  <span className='error'>{this.state.errors.user.telephone}</span>}
+          <div className="col-sm-3 mb-2">
+
+              <input type="text" pattern="[0-9]"  value={phoneNumber} name="telephone" onChange={(e) => { this.inputChange(e)} }  className="form-control" id="telephone" placeholder="PhoneNumber" />
+              { submitted && this.state.errors.user.phoneNumber.length > 0 &&  <span className='error'>{this.state.errors.user.phoneNumber}</span>}
           </div>
-          <div className="col-sm-6 mb-2">
-            <input type="text" pattern="[0-9]" maxLength="14" value={mobileNumber} name="telephone" onChange={(e) => { this.inputChange(e)} }  className="form-control" id="telephone" placeholder="MobileNumber" />
-            { submitted && this.state.errors.user.telephone.length > 0 &&  <span className='error'>{this.state.errors.user.telephone}</span>}
-          </div>
-          <div className="col-sm-4">
+
+
+          <div className="col-sm-3 mb-2">
+              <input type="text" pattern="[0-9]" value={mobileNumber} name="telephone" onChange={(e) => { this.inputChange(e)} }  className="form-control" id="telephone" placeholder="MobileNumber" />
+              { submitted && this.state.errors.user.telephone.length > 0 &&  <span className='error'>{this.state.errors.user.telephone}</span>}
+
+
+
           </div>
         </div>
         <div className="row">
@@ -239,7 +246,6 @@ export class RightContent extends Component {
           <div className="col-sm-4">
             <button type="button" className="button" onClick={this.submitForm}>Submit</button>
           </div>
-          <div className="col-sm-3"></div>
         </div>
       </div>
     )

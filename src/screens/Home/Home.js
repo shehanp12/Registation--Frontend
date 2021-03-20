@@ -7,7 +7,7 @@ export class Home extends Component {
     return (
       <div className="row">
 
-        <Divider />
+
         <div className="rightPanel">
           <Welcome user={this.props.profile} />
           <UserDetails user={this.props.profile} />

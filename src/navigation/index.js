@@ -11,8 +11,10 @@ function AuthenticatedRoute ({component: Component, ...rest}) {
   return (
     <Route
       {...rest}
-      render={(props) => getStore('user') ? <Component {...props} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+      render={
+        (props) => getStore('user') ? <Component {...props} />
+        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+      }
     />
   )
 }
@@ -20,7 +22,7 @@ function AuthenticatedRoute ({component: Component, ...rest}) {
 class Navigation extends Component {
   render() {
     return (
-      <AuthContext.Provider>
+
         <Router>
           <Switch>
             <Route exact path="/login" component={Login} />
@@ -30,7 +32,7 @@ class Navigation extends Component {
             <Route path='*' component={Login} />
           </Switch>
         </Router>
-      </AuthContext.Provider>
+
     )
   }
 }

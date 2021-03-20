@@ -5,16 +5,10 @@ const initialState = {
     firstName: '',
     lastName: '',
     telephone: '',
-    age: 28,
     email: '',
     state: '',
     country: '',
-    address: 'Home',
-    address1: '',
-    address2: '',
-    interests: [],
-    profileImage: '',
-    subscribenewsletter: false
+
   },
   formSubmitted: false
 }
@@ -39,14 +33,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         profile: action.payload.user,
         formSubmitted: false // after update user formsubmition reset
-      }
-    case Types.UPDATE_PROFILE_PICTURE:
-      return {
-        ...state,
-        profile: {
-          ...state.profile,
-          profileImage: action.payload.image
-        }
       }
     case Types.FORM_SUBMITION_STATUS:
       return {
